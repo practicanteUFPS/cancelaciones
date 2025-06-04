@@ -35,7 +35,7 @@ class Index extends CMS_Controller {
                 [
                     'field' => 'usuario',
                     'label' => 'Código',
-                    'rules' => 'trim|required|numeric|max_length[7]|min_length[7]'
+                    'rules' => 'trim|required|numeric|max_length[7]|min_length[5]'
                 ],
                 [
                     'field' => 'password',

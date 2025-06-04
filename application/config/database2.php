@@ -16,15 +16,15 @@ $tnsname_produccion = "(DESCRIPTION =
 $tnsname_pruebas = "(DESCRIPTION = 
             (ADDRESS = 
             (PROTOCOL = TCP)
-            (HOST = 192.168.13.12)
-            (PORT = 1539)) 
+            (HOST = 192.168.13.37)
+            (PORT = 1521)) 
             (CONNECT_DATA = 
             (SERVER = DEDICATED) 
-            (SERVICE_NAME = orcl.ufps.edu.co)))";
+            (SERVICE_NAME = ORCL)))";
 
 $config['database2']['hostname'] = $tnsname_pruebas;
-$config['database2']['username'] = 'PRUEBA';
-$config['database2']['password'] = '1234';
+$config['database2']['username'] = 'PRACTICANTENEW1';
+$config['database2']['password'] = 'PASANTEDIVISIST1';
 //$config['database2']['database'] = 'UFPS2';
 $config['database2']['char_set'] = 'utf8';
 

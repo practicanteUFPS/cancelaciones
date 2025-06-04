@@ -53,8 +53,8 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-//if (in_array($_SERVER['REMOTE_ADDR'], array('192.168.13.180', '::1', '127.0.0.1')) && $_SERVER['SERVER_PORT'] == 10001) {
-if (in_array($_SERVER['REMOTE_ADDR'], array('192.168.13.180', '::1', '127.0.0.1'))) {
+
+if (in_array($_SERVER['REMOTE_ADDR'], array('10.0.2.2', '::1', '127.0.0.1'))&& $_SERVER['SERVER_PORT'] == 10001) {
     $_SERVER['CI_ENV'] = 'development';
 }
 define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');

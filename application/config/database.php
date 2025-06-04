@@ -62,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-$tnsname = "(DESCRIPTION = 
+$tnsname_produccion = "(DESCRIPTION = 
             (ADDRESS = 
             (PROTOCOL = TCP)
             (HOST = 192.168.13.39)
@@ -72,18 +72,18 @@ $tnsname = "(DESCRIPTION =
             (SERVICE_NAME = UFPS) 
             (INSTANCE_NAME = UFPS2)))";
 
-$db['default']['hostname'] = $tnsname;
-$db['default']['username'] = 'MATRICULA';
-$db['default']['password'] = 'NULLE_2011';
-$db['default']['database'] = 'UFPS2';
-$db['default']['dbdriver'] = 'oci8';
-$db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = TRUE;
-$db['default']['db_debug'] = TRUE;
-$db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = '';
-$db['default']['char_set'] = 'utf8';
-$db['default']['dbcollat'] = 'utf8_general_ci';
-$db['default']['swap_pre'] = '';
-$db['default']['autoinit'] = TRUE;
-$db['default']['stricton'] = FALSE;
+$tnsname_pruebas = "(DESCRIPTION = 
+            (ADDRESS = 
+            (PROTOCOL = TCP)
+            (HOST = 192.168.13.12)
+            (PORT = 1539)) 
+            (CONNECT_DATA = 
+            (SERVER = DEDICATED) 
+            (SERVICE_NAME = orcl.ufps.edu.co)))";
+
+$config['database2']['hostname'] = $tnsname_pruebas;
+$config['database2']['username'] = 'PRUEBA';
+$config['database2']['password'] = '1234';
+//$config['database2']['database'] = 'UFPS2';
+$config['database2']['char_set'] = 'utf8';
+

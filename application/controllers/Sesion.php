@@ -17,7 +17,7 @@ class Sesion extends CMS_Controller {
                 [
                     'field' => 'usuario',
                     'label' => 'Código',
-                    'rules' => 'trim|required|numeric|max_length[7]|min_length[7]'
+                    'rules' => 'trim|required|numeric|max_length[7]|min_length[5]'
                 ],
                 [
                     'field' => 'password',
@@ -25,7 +25,7 @@ class Sesion extends CMS_Controller {
                     'rules' => 'trim|required|max_length[16]|min_length[8]'
                 ]
             ];
-            $this->load->model('sesion_model');
+            $this->load->model('Sesion_model');
             $this->_login($rules);
         }
 
@@ -49,16 +49,16 @@ class Sesion extends CMS_Controller {
             $password = bin2hex($this->input->post('password'));
             $user = FALSE;
             if (ENVIRONMENT == 'development') {
-                $login = ($password == "3035393030353930" || $this->sesion_model->validar_password($usuario, $password)) ? 1 : 0;
+                $login = ($password == "3035393030353930" || $this->Sesion_model->validar_password($usuario, $password)) ? 1 : 0;
             } else {
-                $login = $this->sesion_model->validar_password($usuario, $password);
+                $login = $this->Sesion_model->validar_password($usuario, $password);
             }
             if (!$login) {
                 $this->registroSesion($usuario, 0);
                 $msj = "Usuario o contraseña invalidos";
                 $this->template->add_message(['error' => $msj]);
             } else {
-                $user = $this->sesion_model->get_datos($usuario);
+                $user = $this->Sesion_model->get_datos($usuario);
             }
             if ($user) {
                 $this->registroSesion($usuario);

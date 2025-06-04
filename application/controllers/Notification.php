@@ -5,7 +5,7 @@ class Notification extends CMS_Controller {
     function __construct() {
         parent::__construct();
 
-        $this->load->model('notifications_model');
+        $this->load->model('Notifications_model');
         $this->template->set_template('default_template');
         $this->template->add_css('css/adminlte/skins/skin-red-light.min');
         $this->template->add_css('css/adminlte/skins/_all-skins.min');
@@ -18,11 +18,11 @@ class Notification extends CMS_Controller {
 
         //CÓDIGO DE DIVISIST 2 
 
-        $notifications = $this->notifications_model->get_notifications($estudiante->CODIGO);
+        $notifications = $this->Notifications_model->get_notifications($estudiante->CODIGO);
 
         if ($this->unread_notifications) {
             $this->template->add_message(array('info' => 'Los mensajes "No leidos" serán marcados como "Leidos" automaticamente cuando abandone este módulo.'));
-            $this->notifications_model->read_notifications($estudiante->CODIGO);
+            $this->Notifications_model->read_notifications($estudiante->CODIGO);
         }
 
         $this->template->add_js("js/views/notification/notification.min");

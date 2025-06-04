@@ -1,0 +1,17 @@
+{
+    "intelephense.environment.phpVersion": "5.6.0",
+  "intelephense.environment.includePaths": [
+    "${workspaceFolder}/application/core"
+  ],
+  "intelephense.files.exclude": [
+    "**/vendor/**",
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/logs/**",
+    "**/tmp/**"
+  ],
+  "intelephense.diagnostics.undefinedFunctions": false,
+  "intelephense.diagnostics.undefinedMethods": false,
+  "intelephense.diagnostics.undefinedProperties": false,
+  "intelephense.files.maxMemory": 4096,
+}
