@@ -7,10 +7,10 @@ class Materia_model extends CI_Model
         parent::__construct();
     }
 
-    public function get_codigo($codigo)
+    public function get_codigo($codigo,$carrera)
     {
         $sql = "SELECT m.* FROM MATERIA m 
-        WHERE  m.COD_MATERIA = '$codigo'";
+        WHERE  m.COD_MATERIA = '$codigo' AND m.COD_CARRERA = $carrera";
 
         $arr = array();
         $this->database2->get_sql_object($sql, $arr);
@@ -38,6 +38,7 @@ class Materia_model extends CI_Model
                 JOIN PENSUM_MATERIA pm ON pm.COD_CARRERA  = m.COD_CARRERA 
                                         AND pm.COD_MATERIA = m.COD_MATERIA
                 WHERE  m.COD_CARRERA in $codigo
+                and m.ACTIVA= 'S'
                 ORDER BY TO_NUMBER(m.SEMESTRE) ASC , ELECTIVA ASC , m.COD_MATERIA ASC";
 
         $arr = array();

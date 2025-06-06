@@ -180,8 +180,8 @@ SELECT
 	dp.SEXO,
 	TRUNC(MONTHS_BETWEEN(
                         CASE
-                        WHEN n.SEMESTRE = 1 THEN TO_DATE(n.ANO || '-01-01', 'YYYY-MM-DD')-- Primer semestre: enero
-                        WHEN n.SEMESTRE = 2 THEN TO_DATE(n.ANO || '-07-01', 'YYYY-MM-DD')-- Segundo semestre: julio
+                        WHEN n.SEMESTRE = '1' THEN TO_DATE(n.ANO || '-01-01', 'YYYY-MM-DD')-- Primer semestre: enero
+                        WHEN n.SEMESTRE = '2' THEN TO_DATE(n.ANO || '-07-01', 'YYYY-MM-DD')-- Segundo semestre: julio
                         END,
                         dp.FECHA_NACIMIENTO
                     ) / 12) AS EDAD,
@@ -250,8 +250,8 @@ SELECT
 		dp.SEXO,
 		TRUNC(MONTHS_BETWEEN(
                         CASE
-                        WHEN n.SEMESTRE = 1 THEN TO_DATE(n.ANO || '-01-01', 'YYYY-MM-DD')-- Primer semestre: enero
-                        WHEN n.SEMESTRE = 2 THEN TO_DATE(n.ANO || '-07-01', 'YYYY-MM-DD')-- Segundo semestre: julio
+                        WHEN n.SEMESTRE = '1' THEN TO_DATE(n.ANO || '-01-01', 'YYYY-MM-DD')-- Primer semestre: enero
+                        WHEN n.SEMESTRE = '2' THEN TO_DATE(n.ANO || '-07-01', 'YYYY-MM-DD')-- Segundo semestre: julio
                         END,
                         dp.FECHA_NACIMIENTO
                     ) / 12) ,

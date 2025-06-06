@@ -126,7 +126,7 @@ class Nota extends CMS_Controller
         $this->load->model('Materia_model');
 
         $listado = $this->Nota_model->get_conteo_cancelaciones($codigo, $carrera);
-        $materia = $this->Materia_model->get_codigo($codigo);
+        $materia = $this->Materia_model->get_codigo($codigo, $carrera);
 
 
         $breadcrumb_items = [

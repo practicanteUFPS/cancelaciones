@@ -10,7 +10,7 @@ class Alumno extends CMS_Controller
         if (!isset($this->usuario)) {
             redirect();
         }
-
+       
 
         $this->load->model('Alumno_model');
 

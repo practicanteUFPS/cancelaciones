@@ -31,7 +31,7 @@ class Estadistica extends CMS_Controller
 
         //$this->template->add_js('plugins/chartjs/Chart.min');
 
-         $this->template->add_css('css/custom_table_size');
+        $this->template->add_css('css/custom_table_size');
         $this->template->add_js('js/chartjs/chartjs-plugin-datalabels@2');
         $this->template->add_js('js/chartjs/chart');
         $this->template->add_js('plugins/jspdf/jspdf.plugin.autotable.min');
@@ -86,14 +86,27 @@ class Estadistica extends CMS_Controller
             $smestres_factor = $this->Cancelacione_model->semestre_factores($carrera);
             $ult_sem = end($smestres_factor);
 
-            if (!$anio) $anio = $ult_sem->ANO;
-            if (!$semestre)  $semestre = $ult_sem->SEMESTRE;
+             if (!$anio) {
+                if ($ult_sem && is_object($ult_sem) && isset($ult_sem->ANO)) {
+                    $anio = $ult_sem->ANO;
+                } else {
+                    $anio = date('Y'); 
+                }
+            }
+
+            if (!$semestre) {
+                if ($ult_sem && is_object($ult_sem) && isset($ult_sem->SEMESTRE)) {
+                    $semestre = $ult_sem->SEMESTRE;
+                } else {
+                    $semestre = 1; 
+                }
+            }
             if (!$estado) $estado = 'P';
 
             $datos = $this->Cancelacione_model->materia_conteo($carrera, $anio, $semestre, $estado);
 
             $breadcrumb_items = [
-            
+
                 'Motivos por materia' => 'estadistica/materia_cancel'
             ];
             $this->breadcrumb->add_item($breadcrumb_items);
@@ -125,7 +138,7 @@ class Estadistica extends CMS_Controller
         $list_caract = $this->Cancelacione_model->caracteristica_conteo_materia($carrera_mat, $anio, $semestre, $estado, $materia);
 
         $breadcrumb_items = [
-          
+
             'Motivos por materia' => 'estadistica/materia_cancel',
             "motivos de materia $carrera_mat$materia" => 'estadistica/cancelaciones_materia'
 
@@ -165,8 +178,22 @@ class Estadistica extends CMS_Controller
             $smestres_factor = $this->Cancelacione_model->semestre_factores($carrera);
             $ult_sem = end($smestres_factor);
 
-            if (!$anio) $anio = $ult_sem->ANO;
-            if (!$semestre)  $semestre = $ult_sem->SEMESTRE;
+        
+            if (!$anio) {
+                if ($ult_sem && is_object($ult_sem) && isset($ult_sem->ANO)) {
+                    $anio = $ult_sem->ANO;
+                } else {
+                    $anio = date('Y'); 
+                }
+            }
+
+            if (!$semestre) {
+                if ($ult_sem && is_object($ult_sem) && isset($ult_sem->SEMESTRE)) {
+                    $semestre = $ult_sem->SEMESTRE;
+                } else {
+                    $semestre = 1; 
+                }
+            }
             if (!$estado) $estado = 'P';
 
             $list_fact = $this->Cancelacione_model->factores_conteo($carrera, $anio, $semestre, $estado);
@@ -174,7 +201,7 @@ class Estadistica extends CMS_Controller
             $list_caract = $this->Cancelacione_model->caracteristica_conteo_general($carrera, $anio, $semestre, $estado);
 
             $breadcrumb_items = [
-              
+
                 'Factores de cancelacion' => 'estadistica/cancelaciones'
             ];
             $this->breadcrumb->add_item($breadcrumb_items);
@@ -187,7 +214,7 @@ class Estadistica extends CMS_Controller
             $this->template->set('estado', $estado);
             $this->template->set('list_fact', $list_fact);
             $this->template->set('list_caract', $list_caract);
-                    $this->template->add_js('js/estadistica/factores_cancelacion');
+            $this->template->add_js('js/estadistica/factores_cancelacion');
 
             $this->template->set('item_sidebar_active', 'ver_est_cancelaciones');
             $this->template->set('content_header', 'Motivos de cancelacion');
@@ -200,7 +227,7 @@ class Estadistica extends CMS_Controller
     public function buscar_inactivos_edad($anio, $semestre, $categoria)
     {
 
-     
+
         //$anio = $this->input->get('anio');
         //$semestre = $this->input->get('semestre');
         $carrera = $this->carreras_array();
@@ -210,9 +237,9 @@ class Estadistica extends CMS_Controller
 
         $datos_filtrados = array_filter($datos, function ($alumno) use ($categoria) {
             if (!isset($alumno->EDAD_SEMESTRE)) return false;
-    
+
             $edad = (int)$alumno->EDAD_SEMESTRE;
-          
+
             switch ($categoria) {
                 case 'MENOR_18':
 
@@ -236,8 +263,8 @@ class Estadistica extends CMS_Controller
         $this->template->add_js('js/alumno/no_matriculado2');
 
         $breadcrumb_items = [
-          
-        
+
+
             'Desercion por semestre' => 'estadistica/desercion_semestre',
             'Inactivos' => 'alumno/buscar_inactivos_tabla_semestre'
         ];
@@ -289,7 +316,7 @@ class Estadistica extends CMS_Controller
         $datos_filtrados = array_values($datos_filtrados);
 
         $breadcrumb_items = [
-          
+
             'Desercion por semestre' => 'estadistica/desercion_semestre',
             'Activos' => 'alumno/buscar_activos_tabla_semestre'
         ];
@@ -311,7 +338,7 @@ class Estadistica extends CMS_Controller
     public function buscar_inactivos_sexo($anio, $semestre, $sexo)
     {
 
-        
+
         $carrera = $this->carreras_array();
 
 
@@ -326,7 +353,7 @@ class Estadistica extends CMS_Controller
         $this->template->add_js('js/alumno/no_matriculado2');
 
         $breadcrumb_items = [
-           
+
             'Desercion por semestre' => 'estadistica/desercion_semestre',
             'Inactivos' => 'alumno/buscar_inactivos_tabla_semestre'
         ];
@@ -349,7 +376,7 @@ class Estadistica extends CMS_Controller
     public function buscar_activos_sexo($anio, $semestre, $sexo)
     {
 
-   
+
         $carrera = $this->carreras_array();
 
         $datos = $this->Alumno_model->activos_semestre($carrera, $anio . '-' . $semestre);
@@ -362,7 +389,7 @@ class Estadistica extends CMS_Controller
         $datos_filtrados = array_values($datos_filtrados);
 
         $breadcrumb_items = [
-          
+
             'Desercion por semestre' => 'estadistica/desercion_semestre',
             'Activos' => 'alumno/buscar_activos_tabla_semestre'
         ];
@@ -421,7 +448,7 @@ class Estadistica extends CMS_Controller
         //$this->template->set_flash_message(array("mensaje de información cargado en la página anterior por el controlador item2"), "info");
 
         $breadcrumb_items = [
-       
+
             'Desercion por semestre de ingreso' => 'estadistica/desercion_semestre_ingreso'
         ];
         $this->breadcrumb->add_item($breadcrumb_items);
@@ -445,7 +472,7 @@ class Estadistica extends CMS_Controller
 
 
         $breadcrumb_items = [
-          
+
             'Desercion por sexo' => 'estadistica/desercion_sexo'
         ];
         $this->breadcrumb->add_item($breadcrumb_items);
@@ -488,7 +515,7 @@ class Estadistica extends CMS_Controller
         //echo var_dump($data);
 
         $breadcrumb_items = [
-           
+
             'Desercion por edad' => 'estadistica/desercion_edad'
         ];
         $this->breadcrumb->add_item($breadcrumb_items);
